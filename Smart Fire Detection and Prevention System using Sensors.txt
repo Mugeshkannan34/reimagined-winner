@@ -1,0 +1,58 @@
+import time
+import random
+
+# Simulated sensor readings
+def read_smoke_sensor():
+    return random.randint(0, 100)  # Simulate smoke level (0-100%)
+
+def read_temperature_sensor():
+    return random.randint(20, 100)  # Simulate temperature in °C
+
+def read_gas_sensor():
+    return random.randint(0, 100)  # Simulate gas concentration (0-100%)
+
+def read_flame_sensor():
+    return random.choice([0, 1])  # Simulate flame detection (0: No flame, 1: Flame detected)
+
+# Thresholds for fire detection
+SMOKE_THRESHOLD = 70
+TEMPERATURE_THRESHOLD = 60
+GAS_THRESHOLD = 50
+
+# Function to check for fire
+def detect_fire():
+    smoke = read_smoke_sensor()
+    temperature = read_temperature_sensor()
+    gas = read_gas_sensor()
+    flame = read_flame_sensor()
+
+    print(f"Smoke: {smoke}%, Temperature: {temperature}°C, Gas: {gas}%, Flame: {'Detected' if flame else 'Not Detected'}")
+
+    if (smoke > SMOKE_THRESHOLD or temperature > TEMPERATURE_THRESHOLD or gas > GAS_THRESHOLD or flame):
+        return True
+    return False
+
+# Function to trigger alarms and preventive actions
+def fire_alert():
+    print("Fire detected! Triggering alarms and preventive actions...")
+    # Activate buzzer
+    print("Buzzer ON")
+    # Send SMS alert
+    print("SMS sent to emergency contacts")
+    # Activate water pump/sprinkler
+    print("Water pump ON")
+    # Turn on exhaust fan
+    print("Exhaust fan ON")
+
+# Main loop
+def main():
+    print("Fire Detection System Started...")
+    while True:
+        if detect_fire():
+            fire_alert()
+        else:
+            print("No fire detected. System is safe.")
+        time.sleep(2)  # Check every 2 seconds
+
+if __name__ == "__main__":
+    main()
